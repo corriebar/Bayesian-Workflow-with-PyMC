@@ -46,6 +46,7 @@ def get_iqr_outliers(df, col, iqr_factor=4, na_rm=False, directions="both"):
         raise ValueError("direction must be one of 'both', 'upper', or 'lower'")
 
         
-        
+def standardize(x):
+    return (x - x.mean() ) / np.std(x)
 
     
