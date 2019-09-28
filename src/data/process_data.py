@@ -51,14 +51,16 @@ d = d.query("objecttype != 'empty_lot'") \
 d = remove_outlier(d, col="log_sqm_price", iqr_factor=3.5)
 
 # standardize log-price variables
+d["price_s"] = d["price"] / 100000
 d["living_space_s"] = standardize(d["living_space"])
-d["log_price_s"] =  standardize(d["log_price"])
-d["log_sqm_price_s"] = standardize(d["log_sqm_price"])
+d["log_price_s"] =  standardize(d["log_price"], center=True)
+d["log_sqm_price_s"] = standardize(d["log_sqm_price"], center=True)
 d["const_year_s"] = standardize(d["const_year"])
 
 
 # select columns
-d = d[['ags', 'zip', 'lat', 'lng', 'price', 'log_price', 'log_price_s',
+d = d[['ags', 'zip', 'lat', 'lng',
+       'price', 'price_s', 'log_price', 'log_price_s',
        'sqm_price', 'log_sqm_price', 'log_sqm_price_s',
        'living_space', 'living_space_s', 'sale_year',
        'sale_month', 'const_year',  'const_year_s',

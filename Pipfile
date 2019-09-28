@@ -10,6 +10,7 @@ pandas = "*"
 pymc3 = "*"
 numpy = "*"
 jupyter = "*"
+matplotlib = "*"
 
 [requires]
 python_version = "3.7"
