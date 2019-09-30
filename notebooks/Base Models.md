@@ -46,7 +46,7 @@ def draw_model_plot(sample, draws=50, title=""):
 
 
 ```python
-d = pd.read_csv("../data/interim_data/houses.csv", dtype = {"ags": str, "plz": str}, index_col=0)
+d = pd.read_csv("../data/interim_data/houses.csv", dtype = {"ags": str, "zip": str}, index_col=0)
 ```
 
 
@@ -311,7 +311,8 @@ with pm.Model() as intercept_normal:
     
     y = pm.Normal("y", mu=mu, sd=sigma, observed = d[target])
     
-    trace = pm.sample(random_seed=2405, chains=4)
+    trace = pm.sample(random_seed=2412, chains=4, 
+                      draws=2000, tune=1000)
 ```
 
     Auto-assigning NUTS sampler...
@@ -341,7 +342,8 @@ with pm.Model() as intercept_student:
     
     y = pm.StudentT("y", mu=mu, sd=sigma, nu=nu, observed=d[target])
     
-    trace = pm.sample(random_seed=2405, chains=4)
+    trace = pm.sample(random_seed=2412, chains=4, 
+                      draws=2000, tune=1000)
 ```
 
     Auto-assigning NUTS sampler...
@@ -434,7 +436,8 @@ with pm.Model() as lin_normal:
     
     sigma = pm.HalfCauchy("sigma", 5)
     y = pm.Normal("y", mu=mu, sd=sigma, observed=d[target])
-    trace = pm.sample(random_seed=2405, chains=4)
+    trace = pm.sample(random_seed=2412, chains=4, 
+                      draws=2000, tune=1000)
 ```
 
     Auto-assigning NUTS sampler...
@@ -464,7 +467,8 @@ with pm.Model() as lin_student:
     sigma = pm.HalfCauchy("sigma", 5)
     nu = pm.Gamma("nu", alpha=2, beta=0.1)
     y = pm.StudentT("y", nu=nu, mu=mu, sd=sigma, observed=d[target])
-    trace = pm.sample(random_seed=2405, chains=4)
+    trace = pm.sample(random_seed=2412, chains=4, 
+                      draws=2000, tune=1000)
     
     prior = pm.sample_prior_predictive()
 ```
@@ -499,7 +503,7 @@ with pm.Model() as flat_prior:
     beta = pm.Normal("beta", mu=0, sd=1000)
     mu = alpha + beta*d["living_space_s"]
     
-    sigma = pm.HalfCauchy("sigma", 5)
+    sigma = pm.Exponential("sigma", 1/5)
     nu = pm.Gamma("nu", alpha=2, beta=0.1)
     y = pm.StudentT("y", nu=nu, mu=mu, sd=sigma, observed=d[target])
     
@@ -513,7 +517,7 @@ with pm.Model() as less_flat_prior:
     beta = pm.Normal("beta", mu=0, sd=100)
     mu = alpha + beta*d["living_space_s"]
     
-    sigma = pm.HalfCauchy("sigma", 5)
+    sigma = pm.Exponential("sigma", 1/5)
     nu = pm.Gamma("nu", alpha=2, beta=0.1)
     y = pm.StudentT("y", nu=nu, mu=mu, sd=sigma, observed=d[target])
     
@@ -675,11 +679,6 @@ plt.show()
 
 ![png](Base%20Models_files/Base%20Models_43_0.png)
 
-
-
-```python
-
-```
 
 
 ```python
