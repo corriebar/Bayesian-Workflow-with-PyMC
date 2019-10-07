@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from src.utils.utils import remove_outlier, standardize
+from src.utils.data_utils import remove_outlier, standardize
 
 # TODO make filepaths nicer
 d = pd.read_csv("../../data/raw_data/houses.csv", dtype = {"ags": str, "plz": str}, index_col=0)

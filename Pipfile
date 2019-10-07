@@ -12,6 +12,9 @@ numpy = "*"
 jupyter = "*"
 matplotlib = "*"
 arviz = "*"
+seaborn = "*"
+requests = "*"
+geopandas = "*"
 
 [requires]
 python_version = "3.7"
