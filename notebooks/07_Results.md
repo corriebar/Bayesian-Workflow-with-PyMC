@@ -24,7 +24,8 @@ from utils.plot_utils import set_plot_defaults, plot_pred_hist
 
 ```python
 set_plot_defaults("Europace Sans")
-d, zip_lookup, num_zip_codes = load_data()
+d, zip_lookup, num_zip_codes = load_data(kind="prices")   # loads data from data/interim_data/houses.csv 
+                                                          # aternatively, use kind="rents" to load data from data/interim_data/rent.csv
 zip_codes = np.sort(d.zip.unique())
 target = "price_s"
 ```

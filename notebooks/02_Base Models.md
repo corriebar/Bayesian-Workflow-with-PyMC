@@ -26,7 +26,7 @@ from utils.plot_utils import set_plot_defaults
 
 
 ```python
-d, _, _ = load_data()
+d, _, _ = load_data(kind="prices")
 set_plot_defaults("Europace Sans")
 target = "price_s"
 ```

@@ -1,6 +1,7 @@
-```python
+# Posterior Predictive Checks
 
-```
+How well does the model fit the data?
+Note that a Bayesian model does not just return a point estimate as a prediction but always a distribution. It is thus not sufficient to just check if such point estimate is close to the true value but we need to check that the posterior predictive distribution is a good fit.
 
 
 ```python
@@ -28,7 +29,8 @@ from utils.ppc_utils import plot_ppc
 
 ```python
 set_plot_defaults("Europace Sans")
-d, _, _ = load_data()
+d, _, _ = load_data(kind="prices")   # loads data from data/interim_data/houses.csv 
+                                     # aternatively, use kind="rents" to load data from data/interim_data/rent.csv
 ```
 
 
@@ -49,6 +51,8 @@ inf_data
 
 
 
+One way to analyse how well the model fits the data is to compare the distribution of our observed data with the distribution of predicted data.
+
 
 ```python
 ax = az.plot_ppc(inf_data, kind="density", num_pp_samples=100)
@@ -61,7 +65,7 @@ plt.show()
 ```
 
 
-![png](06_Posterior_Predictive_Checks_files/06_Posterior_Predictive_Checks_4_0.png)
+![png](06_Posterior_Predictive_Checks_files/06_Posterior_Predictive_Checks_5_0.png)
 
 
 
@@ -72,6 +76,8 @@ plt.rcParams['legend.fontsize'] = 22
 plt.rcParams['font.size'] = 20
 ```
 
+Another way of visualizing the same information is to instead compare histograms of the observed data versus some random samples from the posterior predictive distribution.
+
 
 ```python
 plot_ppc(inf_data, kind="hist")
@@ -79,8 +85,10 @@ plt.show()
 ```
 
 
-![png](06_Posterior_Predictive_Checks_files/06_Posterior_Predictive_Checks_6_0.png)
+![png](06_Posterior_Predictive_Checks_files/06_Posterior_Predictive_Checks_8_0.png)
 
+
+Yet another way of visualizing the same information:
 
 
 ```python
@@ -89,8 +97,10 @@ plt.show()
 ```
 
 
-![png](06_Posterior_Predictive_Checks_files/06_Posterior_Predictive_Checks_7_0.png)
+![png](06_Posterior_Predictive_Checks_files/06_Posterior_Predictive_Checks_10_0.png)
 
+
+We can also of course reduce the posterior predictive distribution to a point estimate and then check how close this value is to the real value. In the following visualization, they should ideally all be close to the diagonal.
 
 
 ```python
@@ -99,5 +109,7 @@ plt.show()
 ```
 
 
-![png](06_Posterior_Predictive_Checks_files/06_Posterior_Predictive_Checks_8_0.png)
+![png](06_Posterior_Predictive_Checks_files/06_Posterior_Predictive_Checks_12_0.png)
 
+
+Especially for the more pricy objects, our model seems to underestimate the prices and the points are quite far from the diagonal. For the houses in the lower/average prices, the model seems fine, though it seems here to overestimate the prices a bit.

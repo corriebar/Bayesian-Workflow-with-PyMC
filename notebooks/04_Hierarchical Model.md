@@ -39,7 +39,8 @@ from utils.plot_utils import draw_model_plot, set_plot_defaults
 
 ```python
 set_plot_defaults(font="Europace Sans")
-d, zip_lookup, num_zip_codes = load_data()
+d, zip_lookup, num_zip_codes = load_data(kind="prices")   # loads data from data/interim_data/houses.csv 
+                                                          # aternatively, use kind="rents" to load data from data/interim_data/rent.csv
 zip_codes = np.sort(d.zip.unique())
 
 target = "price_s"

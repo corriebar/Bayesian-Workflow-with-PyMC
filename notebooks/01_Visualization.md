@@ -19,7 +19,8 @@ from utils.data_utils import load_data
 
 ```python
 set_plot_defaults(font="Europace Sans")
-d, _, _ = load_data()
+d, _, _ = load_data(kind="prices")   # loads data from data/interim_data/houses.csv 
+                                     # aternatively, use kind="rents" to load data from data/interim_data/rent.csv
 ```
 
 The area, in particular the living area, of a home is one of the best predictors for its price.
