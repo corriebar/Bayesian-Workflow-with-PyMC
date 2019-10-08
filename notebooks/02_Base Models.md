@@ -26,7 +26,8 @@ from utils.plot_utils import set_plot_defaults
 
 
 ```python
-d, _, _ = load_data(kind="prices")
+d, _, _ = load_data(kind="prices")   # loads data from data/interim_data/houses.csv 
+                                     # aternatively, use kind="rents" to load data from data/interim_data/rent.csv
 set_plot_defaults("Europace Sans")
 target = "price_s"
 ```

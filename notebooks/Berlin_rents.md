@@ -20,7 +20,7 @@ from utils.plot_utils import set_plot_defaults, plot_pred_hist
 
 ```python
 set_plot_defaults(font="Roboto")
-d, zip_lookup, num_zip_codes = load_data(kind="rent")
+d, zip_lookup, num_zip_codes = load_data(kind="rents")
 zip_codes = np.sort(d.zip.unique())
 
 target = "rent_s"
