@@ -95,7 +95,7 @@ with centered_hier_model:
     post_pred = pm.sample_posterior_predictive(trace, samples=1000)
 ```
 
-    100%|██████████| 1000/1000 [00:01<00:00, 500.80it/s]
+    100%|██████████| 1000/1000 [00:01<00:00, 582.72it/s]
 
 
 
@@ -202,7 +202,7 @@ with centered_hier_model:
     post_pred = pm.sample_posterior_predictive(trace, samples=1000)
 ```
 
-    100%|██████████| 1000/1000 [00:02<00:00, 497.26it/s]
+    100%|██████████| 1000/1000 [00:01<00:00, 516.32it/s]
 
 
 

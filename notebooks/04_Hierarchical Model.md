@@ -76,7 +76,7 @@ with pm.Model() as hier_model_naiv:
     Initializing NUTS using jitter+adapt_diag...
     Multiprocess sampling (4 chains in 2 jobs)
     NUTS: [sigma, beta, alpha, sigma_beta, mu_beta, sigma_alpha, mu_alpha]
-    Sampling 4 chains: 100%|██████████| 8000/8000 [10:49<00:00, 12.32draws/s] 
+    Sampling 4 chains: 100%|██████████| 8000/8000 [04:59<00:00, 26.68draws/s] 
     There were 321 divergences after tuning. Increase `target_accept` or reparameterize.
     The acceptance probability does not match the target. It is 0.7095635801521762, but should be close to 0.8. Try to increase the number of tuning steps.
     There were 324 divergences after tuning. Increase `target_accept` or reparameterize.
@@ -86,7 +86,7 @@ with pm.Model() as hier_model_naiv:
     The acceptance probability does not match the target. It is 0.598018163979549, but should be close to 0.8. Try to increase the number of tuning steps.
     The gelman-rubin statistic is larger than 1.05 for some parameters. This indicates slight problems during sampling.
     The estimated number of effective samples is smaller than 200 for some parameters.
-    100%|██████████| 4000/4000 [00:10<00:00, 370.32it/s]
+    100%|██████████| 4000/4000 [00:05<00:00, 680.79it/s]
 
 
 
@@ -371,14 +371,6 @@ with pm.Model() as centered_hier_model:
     posterior_predictive = pm.sample_posterior_predictive(trace)
 ```
 
-    Auto-assigning NUTS sampler...
-    Initializing NUTS using jitter+adapt_diag...
-    Multiprocess sampling (4 chains in 2 jobs)
-    NUTS: [sigma, beta, alpha, sigma_beta, mu_beta, sigma_alpha, mu_alpha]
-    Sampling 4 chains: 100%|██████████| 8000/8000 [01:50<00:00, 72.36draws/s] 
-    100%|██████████| 4000/4000 [00:09<00:00, 409.70it/s]
-
-
 
 ```python
 data = az.from_pymc3(trace=trace,
@@ -388,19 +380,6 @@ data = az.from_pymc3(trace=trace,
                      dims={"alpha": ["zip_code"], "beta": ["zip_code"]})
 data
 ```
-
-
-
-
-    Inference data with groups:
-    	> posterior
-    	> sample_stats
-    	> posterior_predictive
-    	> prior
-    	> observed_data
-    	> constant_data
-
-
 
 
 ```python
@@ -413,13 +392,6 @@ data.to_netcdf("../models/centered_hier.nc")
 ```
 
 
-
-
-    '../models/centered_hier.nc'
-
-
-
-
 ```python
 az.plot_trace(data.posterior.where(data.posterior.zip_code.isin(["12047"]), drop=True),
              var_names=["alpha"])
@@ -427,219 +399,15 @@ plt.show()
 ```
 
 
-![png](04_Hierarchical%20Model_files/04_Hierarchical%20Model_14_0.png)
-
-
-
 ```python
 az.summary(trace)
 ```
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>mean</th>
-      <th>sd</th>
-      <th>hpd_3%</th>
-      <th>hpd_97%</th>
-      <th>mcse_mean</th>
-      <th>mcse_sd</th>
-      <th>ess_mean</th>
-      <th>ess_sd</th>
-      <th>ess_bulk</th>
-      <th>ess_tail</th>
-      <th>r_hat</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>mu_alpha</td>
-      <td>3.642</td>
-      <td>0.057</td>
-      <td>3.527</td>
-      <td>3.741</td>
-      <td>0.001</td>
-      <td>0.001</td>
-      <td>5524.0</td>
-      <td>5524.0</td>
-      <td>5535.0</td>
-      <td>3184.0</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <td>mu_beta</td>
-      <td>2.775</td>
-      <td>0.099</td>
-      <td>2.596</td>
-      <td>2.966</td>
-      <td>0.001</td>
-      <td>0.001</td>
-      <td>5782.0</td>
-      <td>5781.0</td>
-      <td>5766.0</td>
-      <td>3343.0</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <td>alpha[0]</td>
-      <td>4.976</td>
-      <td>0.161</td>
-      <td>4.688</td>
-      <td>5.289</td>
-      <td>0.002</td>
-      <td>0.002</td>
-      <td>5618.0</td>
-      <td>5590.0</td>
-      <td>5626.0</td>
-      <td>3249.0</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <td>alpha[1]</td>
-      <td>5.097</td>
-      <td>0.289</td>
-      <td>4.545</td>
-      <td>5.616</td>
-      <td>0.004</td>
-      <td>0.003</td>
-      <td>6018.0</td>
-      <td>6018.0</td>
-      <td>6017.0</td>
-      <td>3309.0</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <td>alpha[2]</td>
-      <td>5.128</td>
-      <td>0.201</td>
-      <td>4.731</td>
-      <td>5.483</td>
-      <td>0.002</td>
-      <td>0.002</td>
-      <td>7223.0</td>
-      <td>7223.0</td>
-      <td>7272.0</td>
-      <td>3517.0</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <td>beta[217]</td>
-      <td>2.668</td>
-      <td>1.280</td>
-      <td>0.290</td>
-      <td>4.958</td>
-      <td>0.014</td>
-      <td>0.012</td>
-      <td>7809.0</td>
-      <td>5449.0</td>
-      <td>7833.0</td>
-      <td>2742.0</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <td>beta[218]</td>
-      <td>0.504</td>
-      <td>0.792</td>
-      <td>-0.999</td>
-      <td>1.999</td>
-      <td>0.009</td>
-      <td>0.011</td>
-      <td>7653.0</td>
-      <td>2519.0</td>
-      <td>7656.0</td>
-      <td>3127.0</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <td>sigma_alpha</td>
-      <td>0.741</td>
-      <td>0.044</td>
-      <td>0.664</td>
-      <td>0.830</td>
-      <td>0.001</td>
-      <td>0.000</td>
-      <td>4491.0</td>
-      <td>4491.0</td>
-      <td>4466.0</td>
-      <td>3015.0</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <td>sigma_beta</td>
-      <td>1.274</td>
-      <td>0.071</td>
-      <td>1.146</td>
-      <td>1.415</td>
-      <td>0.001</td>
-      <td>0.001</td>
-      <td>4779.0</td>
-      <td>4779.0</td>
-      <td>4726.0</td>
-      <td>3035.0</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <td>sigma</td>
-      <td>1.203</td>
-      <td>0.010</td>
-      <td>1.184</td>
-      <td>1.221</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>7403.0</td>
-      <td>7403.0</td>
-      <td>7381.0</td>
-      <td>3018.0</td>
-      <td>1.0</td>
-    </tr>
-  </tbody>
-</table>
-<p>443 rows × 11 columns</p>
-</div>
-
-
 
 
 ```python
 az.plot_trace(trace, var_names=["mu_alpha", "mu_beta", "sigma_alpha", "sigma_beta", "sigma"])
 plt.show()
 ```
-
-
-![png](04_Hierarchical%20Model_files/04_Hierarchical%20Model_16_0.png)
-
 
 ## Non-Centered Version
 Often, this reparametrization works better. For a more detailed explanation, I refer again to the [blog post](https://twiecki.io/blog/2017/02/08/bayesian-hierchical-non-centered/) by Thomas Wiecki.
@@ -670,225 +438,16 @@ with pm.Model() as non_centered_hier:
     posterior_predictive = pm.sample_posterior_predictive(trace)
 ```
 
-    Auto-assigning NUTS sampler...
-    Initializing NUTS using jitter+adapt_diag...
-    Multiprocess sampling (4 chains in 2 jobs)
-    NUTS: [sigma, sigma_alpha, mu_alpha, alpha_offset, sigma_beta, mu_beta, beta_offset]
-    Sampling 4 chains: 100%|██████████| 8000/8000 [03:29<00:00, 38.28draws/s]
-    The number of effective samples is smaller than 25% for some parameters.
-    100%|██████████| 4000/4000 [00:10<00:00, 364.94it/s]
-
-
 
 ```python
 az.summary(trace)
 ```
 
 
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>mean</th>
-      <th>sd</th>
-      <th>hpd_3%</th>
-      <th>hpd_97%</th>
-      <th>mcse_mean</th>
-      <th>mcse_sd</th>
-      <th>ess_mean</th>
-      <th>ess_sd</th>
-      <th>ess_bulk</th>
-      <th>ess_tail</th>
-      <th>r_hat</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>beta_offset[0]</td>
-      <td>0.737</td>
-      <td>0.250</td>
-      <td>0.279</td>
-      <td>1.213</td>
-      <td>0.004</td>
-      <td>0.003</td>
-      <td>3385.0</td>
-      <td>2935.0</td>
-      <td>3383.0</td>
-      <td>2582.0</td>
-      <td>1.00</td>
-    </tr>
-    <tr>
-      <td>beta_offset[1]</td>
-      <td>0.868</td>
-      <td>0.455</td>
-      <td>0.013</td>
-      <td>1.702</td>
-      <td>0.006</td>
-      <td>0.005</td>
-      <td>6135.0</td>
-      <td>4083.0</td>
-      <td>6237.0</td>
-      <td>2802.0</td>
-      <td>1.00</td>
-    </tr>
-    <tr>
-      <td>beta_offset[2]</td>
-      <td>1.293</td>
-      <td>0.323</td>
-      <td>0.686</td>
-      <td>1.913</td>
-      <td>0.005</td>
-      <td>0.003</td>
-      <td>4578.0</td>
-      <td>4578.0</td>
-      <td>4561.0</td>
-      <td>3079.0</td>
-      <td>1.00</td>
-    </tr>
-    <tr>
-      <td>beta_offset[3]</td>
-      <td>-0.205</td>
-      <td>0.938</td>
-      <td>-1.984</td>
-      <td>1.525</td>
-      <td>0.010</td>
-      <td>0.016</td>
-      <td>9016.0</td>
-      <td>1708.0</td>
-      <td>9001.0</td>
-      <td>3022.0</td>
-      <td>1.00</td>
-    </tr>
-    <tr>
-      <td>beta_offset[4]</td>
-      <td>-0.079</td>
-      <td>0.949</td>
-      <td>-1.994</td>
-      <td>1.626</td>
-      <td>0.009</td>
-      <td>0.016</td>
-      <td>10836.0</td>
-      <td>1722.0</td>
-      <td>10794.0</td>
-      <td>2975.0</td>
-      <td>1.00</td>
-    </tr>
-    <tr>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <td>alpha_offset[218]</td>
-      <td>-0.728</td>
-      <td>0.940</td>
-      <td>-2.407</td>
-      <td>1.085</td>
-      <td>0.011</td>
-      <td>0.011</td>
-      <td>7589.0</td>
-      <td>3522.0</td>
-      <td>7606.0</td>
-      <td>3218.0</td>
-      <td>1.00</td>
-    </tr>
-    <tr>
-      <td>mu_alpha</td>
-      <td>3.640</td>
-      <td>0.054</td>
-      <td>3.539</td>
-      <td>3.739</td>
-      <td>0.002</td>
-      <td>0.001</td>
-      <td>846.0</td>
-      <td>846.0</td>
-      <td>846.0</td>
-      <td>1481.0</td>
-      <td>1.00</td>
-    </tr>
-    <tr>
-      <td>sigma_beta</td>
-      <td>1.274</td>
-      <td>0.073</td>
-      <td>1.141</td>
-      <td>1.412</td>
-      <td>0.003</td>
-      <td>0.002</td>
-      <td>688.0</td>
-      <td>687.0</td>
-      <td>688.0</td>
-      <td>1545.0</td>
-      <td>1.01</td>
-    </tr>
-    <tr>
-      <td>sigma_alpha</td>
-      <td>0.741</td>
-      <td>0.043</td>
-      <td>0.660</td>
-      <td>0.819</td>
-      <td>0.001</td>
-      <td>0.001</td>
-      <td>1193.0</td>
-      <td>1193.0</td>
-      <td>1189.0</td>
-      <td>2030.0</td>
-      <td>1.00</td>
-    </tr>
-    <tr>
-      <td>sigma</td>
-      <td>1.203</td>
-      <td>0.010</td>
-      <td>1.184</td>
-      <td>1.222</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>9312.0</td>
-      <td>9312.0</td>
-      <td>9267.0</td>
-      <td>2736.0</td>
-      <td>1.01</td>
-    </tr>
-  </tbody>
-</table>
-<p>443 rows × 11 columns</p>
-</div>
-
-
-
-
 ```python
 az.plot_trace(trace, var_names=["mu_alpha", "mu_beta", "sigma_alpha", "sigma_beta", "sigma"])
 plt.show()
 ```
-
-
-![png](04_Hierarchical%20Model_files/04_Hierarchical%20Model_20_0.png)
-
 
 ## Multivariate Model (includes correlation)
 Another way of coding a hierarchical model is to use a multivariate normal distribution for the random effects:
@@ -938,34 +497,6 @@ with pm.Model() as correlation_hier_model:
     posterior_predictive = pm.sample_posterior_predictive(trace)
 ```
 
-    Auto-assigning NUTS sampler...
-    Initializing NUTS using jitter+adapt_diag...
-    /home/corrie/.pyenv/versions/anaconda3-2019.03/lib/python3.7/site-packages/theano/tensor/basic.py:6611: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
-      result[diagonal_slice] = x
-    /home/corrie/.pyenv/versions/anaconda3-2019.03/lib/python3.7/site-packages/theano/tensor/basic.py:6611: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
-      result[diagonal_slice] = x
-    /home/corrie/.pyenv/versions/anaconda3-2019.03/lib/python3.7/site-packages/theano/tensor/basic.py:6611: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
-      result[diagonal_slice] = x
-    /home/corrie/.pyenv/versions/anaconda3-2019.03/lib/python3.7/site-packages/theano/tensor/basic.py:6611: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
-      result[diagonal_slice] = x
-    /home/corrie/.pyenv/versions/anaconda3-2019.03/lib/python3.7/site-packages/theano/tensor/basic.py:6611: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
-      result[diagonal_slice] = x
-    /home/corrie/.pyenv/versions/anaconda3-2019.03/lib/python3.7/site-packages/theano/tensor/basic.py:6611: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
-      result[diagonal_slice] = x
-    Multiprocess sampling (4 chains in 2 jobs)
-    NUTS: [sd_price, ab, C_triu, sigma, mu]
-    Sampling 4 chains:   0%|          | 0/8000 [00:00<?, ?draws/s]/home/corrie/.pyenv/versions/anaconda3-2019.03/lib/python3.7/site-packages/theano/tensor/basic.py:6611: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
-      result[diagonal_slice] = x
-    /home/corrie/.pyenv/versions/anaconda3-2019.03/lib/python3.7/site-packages/theano/tensor/basic.py:6611: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
-      result[diagonal_slice] = x
-    Sampling 4 chains:  50%|████▉     | 3965/8000 [05:31<02:33, 26.33draws/s] /home/corrie/.pyenv/versions/anaconda3-2019.03/lib/python3.7/site-packages/theano/tensor/basic.py:6611: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
-      result[diagonal_slice] = x
-    Sampling 4 chains:  50%|█████     | 4004/8000 [05:34<05:52, 11.34draws/s]/home/corrie/.pyenv/versions/anaconda3-2019.03/lib/python3.7/site-packages/theano/tensor/basic.py:6611: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
-      result[diagonal_slice] = x
-    Sampling 4 chains: 100%|██████████| 8000/8000 [10:43<00:00, 12.43draws/s]
-    100%|██████████| 4000/4000 [00:09<00:00, 406.16it/s]
-
-
 
 ```python
 mvn_data = az.from_pymc3(trace=trace,
@@ -979,28 +510,9 @@ mvn_data
 ```
 
 
-
-
-    Inference data with groups:
-    	> posterior
-    	> sample_stats
-    	> posterior_predictive
-    	> prior
-    	> observed_data
-
-
-
-
 ```python
 mvn_data.to_netcdf("../models/mvn_hier.nc")
 ```
-
-
-
-
-    '../models/mvn_hier.nc'
-
-
 
 
 ```python
@@ -1010,205 +522,4 @@ pm.save_trace(trace, directory="../models/mvn_hier")
 
 ```python
 az.summary(mvn_data)
-```
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>mean</th>
-      <th>sd</th>
-      <th>hpd_3%</th>
-      <th>hpd_97%</th>
-      <th>mcse_mean</th>
-      <th>mcse_sd</th>
-      <th>ess_mean</th>
-      <th>ess_sd</th>
-      <th>ess_bulk</th>
-      <th>ess_tail</th>
-      <th>r_hat</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>mu[0]</td>
-      <td>3.648</td>
-      <td>0.059</td>
-      <td>3.534</td>
-      <td>3.754</td>
-      <td>0.001</td>
-      <td>0.001</td>
-      <td>2995.0</td>
-      <td>2995.0</td>
-      <td>3018.0</td>
-      <td>2698.0</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <td>mu[1]</td>
-      <td>2.762</td>
-      <td>0.102</td>
-      <td>2.578</td>
-      <td>2.955</td>
-      <td>0.002</td>
-      <td>0.001</td>
-      <td>2870.0</td>
-      <td>2869.0</td>
-      <td>2877.0</td>
-      <td>3188.0</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <td>ab[0,0]</td>
-      <td>4.992</td>
-      <td>0.168</td>
-      <td>4.686</td>
-      <td>5.321</td>
-      <td>0.002</td>
-      <td>0.002</td>
-      <td>4780.0</td>
-      <td>4780.0</td>
-      <td>4766.0</td>
-      <td>2622.0</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <td>ab[0,1]</td>
-      <td>3.817</td>
-      <td>0.310</td>
-      <td>3.240</td>
-      <td>4.404</td>
-      <td>0.004</td>
-      <td>0.003</td>
-      <td>4836.0</td>
-      <td>4836.0</td>
-      <td>4840.0</td>
-      <td>3241.0</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <td>ab[1,0]</td>
-      <td>5.213</td>
-      <td>0.299</td>
-      <td>4.694</td>
-      <td>5.808</td>
-      <td>0.005</td>
-      <td>0.004</td>
-      <td>3573.0</td>
-      <td>3573.0</td>
-      <td>3573.0</td>
-      <td>3478.0</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <td>ab[218,1]</td>
-      <td>0.618</td>
-      <td>0.629</td>
-      <td>-0.532</td>
-      <td>1.818</td>
-      <td>0.008</td>
-      <td>0.007</td>
-      <td>6731.0</td>
-      <td>3561.0</td>
-      <td>6723.0</td>
-      <td>3093.0</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <td>sigma[0]</td>
-      <td>0.768</td>
-      <td>0.044</td>
-      <td>0.685</td>
-      <td>0.852</td>
-      <td>0.001</td>
-      <td>0.001</td>
-      <td>2338.0</td>
-      <td>2328.0</td>
-      <td>2357.0</td>
-      <td>2385.0</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <td>sigma[1]</td>
-      <td>1.293</td>
-      <td>0.073</td>
-      <td>1.159</td>
-      <td>1.430</td>
-      <td>0.001</td>
-      <td>0.001</td>
-      <td>2648.0</td>
-      <td>2646.0</td>
-      <td>2655.0</td>
-      <td>3208.0</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <td>C_triu[0]</td>
-      <td>0.716</td>
-      <td>0.044</td>
-      <td>0.633</td>
-      <td>0.795</td>
-      <td>0.001</td>
-      <td>0.001</td>
-      <td>1920.0</td>
-      <td>1887.0</td>
-      <td>1859.0</td>
-      <td>2468.0</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <td>sd_price</td>
-      <td>1.203</td>
-      <td>0.010</td>
-      <td>1.186</td>
-      <td>1.221</td>
-      <td>0.000</td>
-      <td>0.000</td>
-      <td>5283.0</td>
-      <td>5283.0</td>
-      <td>5303.0</td>
-      <td>3019.0</td>
-      <td>1.0</td>
-    </tr>
-  </tbody>
-</table>
-<p>444 rows × 11 columns</p>
-</div>
-
-
-
-
-```python
-
 ```

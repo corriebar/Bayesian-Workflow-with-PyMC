@@ -20,6 +20,7 @@ from utils.data_utils import destandardize_area, destandardize_price, load_data,
 from utils.plot_utils import set_plot_defaults
 ```
 
+    WARNING (theano.tensor.blas): Using NumPy C-API based implementation for BLAS functions.
     /home/corrie/.pyenv/versions/anaconda3-2019.03/lib/python3.7/site-packages/xarray/core/merge.py:17: FutureWarning: The Panel class is removed from pandas. Accessing it from the top-level namespace will also be removed in the next version
       PANDAS_TYPES = (pd.Series, pd.DataFrame, pd.Panel)
 
@@ -228,7 +229,7 @@ with pm.Model() as intercept_normal:
     Initializing NUTS using jitter+adapt_diag...
     Multiprocess sampling (4 chains in 2 jobs)
     NUTS: [sigma, mu]
-    Sampling 4 chains: 100%|██████████| 8000/8000 [00:15<00:00, 509.15draws/s]
+    Sampling 4 chains: 100%|██████████| 8000/8000 [00:05<00:00, 1379.59draws/s]
 
 
 
@@ -266,7 +267,7 @@ with pm.Model() as intercept_student:
     Initializing NUTS using jitter+adapt_diag...
     Multiprocess sampling (4 chains in 2 jobs)
     NUTS: [nu, sigma, mu]
-    Sampling 4 chains: 100%|██████████| 8000/8000 [00:32<00:00, 242.69draws/s]
+    Sampling 4 chains: 100%|██████████| 8000/8000 [00:11<00:00, 719.05draws/s]
 
 
 
@@ -309,7 +310,7 @@ with pm.Model() as lin_normal:
     Initializing NUTS using jitter+adapt_diag...
     Multiprocess sampling (4 chains in 2 jobs)
     NUTS: [sigma, beta, alpha]
-    Sampling 4 chains: 100%|██████████| 8000/8000 [00:20<00:00, 393.26draws/s]
+    Sampling 4 chains: 100%|██████████| 8000/8000 [00:06<00:00, 1282.28draws/s]
 
 
 
@@ -344,7 +345,7 @@ with pm.Model() as lin_student:
     Initializing NUTS using jitter+adapt_diag...
     Multiprocess sampling (4 chains in 2 jobs)
     NUTS: [nu, sigma, beta, alpha]
-    Sampling 4 chains: 100%|██████████| 8000/8000 [00:37<00:00, 212.33draws/s]
+    Sampling 4 chains: 100%|██████████| 8000/8000 [00:16<00:00, 472.25draws/s]
 
 
 

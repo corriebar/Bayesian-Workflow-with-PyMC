@@ -57,10 +57,10 @@ with pm.Model() as flat_prior:
     Initializing NUTS using jitter+adapt_diag...
     Multiprocess sampling (2 chains in 2 jobs)
     NUTS: [sigma, beta, alpha]
-    Sampling 2 chains: 100%|██████████| 200/200 [00:00<00:00, 307.85draws/s]
+    Sampling 2 chains: 100%|██████████| 200/200 [00:00<00:00, 713.43draws/s] 
     /home/corrie/.pyenv/versions/anaconda3-2019.03/lib/python3.7/site-packages/pymc3/sampling.py:464: UserWarning: The number of samples is too small to check convergence reliably.
       warnings.warn("The number of samples is too small to check convergence reliably.")
-    The acceptance probability does not match the target. It is 0.913688804620866, but should be close to 0.8. Try to increase the number of tuning steps.
+    The acceptance probability does not match the target. It is 0.931794761412067, but should be close to 0.8. Try to increase the number of tuning steps.
 
 
 Just for comparison, a standard normal prior.
@@ -84,11 +84,11 @@ with pm.Model() as normal_prior:             # I guess I also could have just us
     Initializing NUTS using jitter+adapt_diag...
     Multiprocess sampling (2 chains in 2 jobs)
     NUTS: [sigma, beta, alpha]
-    Sampling 2 chains: 100%|██████████| 200/200 [00:00<00:00, 457.87draws/s]
+    Sampling 2 chains: 100%|██████████| 200/200 [00:00<00:00, 846.55draws/s] 
     /home/corrie/.pyenv/versions/anaconda3-2019.03/lib/python3.7/site-packages/pymc3/sampling.py:464: UserWarning: The number of samples is too small to check convergence reliably.
       warnings.warn("The number of samples is too small to check convergence reliably.")
-    The acceptance probability does not match the target. It is 0.9745948272037334, but should be close to 0.8. Try to increase the number of tuning steps.
-    The acceptance probability does not match the target. It is 0.9325072895897503, but should be close to 0.8. Try to increase the number of tuning steps.
+    The acceptance probability does not match the target. It is 0.9973959217842103, but should be close to 0.8. Try to increase the number of tuning steps.
+    The acceptance probability does not match the target. It is 0.9640592394561096, but should be close to 0.8. Try to increase the number of tuning steps.
 
 
 
@@ -238,7 +238,7 @@ with pm.Model() as weakly_inf_prior:
     Initializing NUTS using jitter+adapt_diag...
     Multiprocess sampling (2 chains in 2 jobs)
     NUTS: [sigma, beta, alpha]
-    Sampling 2 chains: 100%|██████████| 200/200 [00:00<00:00, 538.28draws/s]
+    Sampling 2 chains: 100%|██████████| 200/200 [00:00<00:00, 922.36draws/s] 
     /home/corrie/.pyenv/versions/anaconda3-2019.03/lib/python3.7/site-packages/pymc3/sampling.py:464: UserWarning: The number of samples is too small to check convergence reliably.
       warnings.warn("The number of samples is too small to check convergence reliably.")
     The acceptance probability does not match the target. It is 0.9771716690694046, but should be close to 0.8. Try to increase the number of tuning steps.
@@ -336,7 +336,7 @@ with pm.Model() as inf_prior:
     Initializing NUTS using jitter+adapt_diag...
     Multiprocess sampling (2 chains in 2 jobs)
     NUTS: [sigma, beta, alpha]
-    Sampling 2 chains: 100%|██████████| 200/200 [00:00<00:00, 499.41draws/s]
+    Sampling 2 chains: 100%|██████████| 200/200 [00:00<00:00, 957.86draws/s]
     /home/corrie/.pyenv/versions/anaconda3-2019.03/lib/python3.7/site-packages/pymc3/sampling.py:464: UserWarning: The number of samples is too small to check convergence reliably.
       warnings.warn("The number of samples is too small to check convergence reliably.")
     The acceptance probability does not match the target. It is 0.9413059770218641, but should be close to 0.8. Try to increase the number of tuning steps.

@@ -15,6 +15,7 @@ arviz = "*"
 seaborn = "*"
 requests = "*"
 geopandas = "*"
+ipykernel = "*"
 
 [requires]
 python_version = "3.7"

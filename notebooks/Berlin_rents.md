@@ -17,6 +17,11 @@ from utils.data_utils import load_data, standardize_area, map_zip_codes
 from utils.plot_utils import set_plot_defaults, plot_pred_hist
 ```
 
+    WARNING (theano.tensor.blas): Using NumPy C-API based implementation for BLAS functions.
+    /home/corrie/.pyenv/versions/anaconda3-2019.03/lib/python3.7/site-packages/xarray/core/merge.py:17: FutureWarning: The Panel class is removed from pandas. Accessing it from the top-level namespace will also be removed in the next version
+      PANDAS_TYPES = (pd.Series, pd.DataFrame, pd.Panel)
+
+
 
 ```python
 set_plot_defaults(font="Roboto")

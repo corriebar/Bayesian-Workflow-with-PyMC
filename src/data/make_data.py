@@ -8,4 +8,10 @@ def download_shapefiles():
     z = zipfile.ZipFile(io.BytesIO(r.content))
     z.extractall("../../data/shapefiles/plz-gebiete")
 
+def unzip_immo_data():
+    with zipfile.ZipFile("../../data/raw_data/immo_data.zip") as zip_ref:
+        zip_ref.extractall("../../data/raw_data")
+
 download_shapefiles()
+
+unzip_immo_data()

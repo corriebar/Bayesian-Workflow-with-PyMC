@@ -20,10 +20,9 @@ from utils.plot_utils import set_plot_defaults
 from utils.ppc_utils import plot_ppc
 ```
 
+    WARNING (theano.tensor.blas): Using NumPy C-API based implementation for BLAS functions.
     /home/corrie/.pyenv/versions/anaconda3-2019.03/lib/python3.7/site-packages/xarray/core/merge.py:17: FutureWarning: The Panel class is removed from pandas. Accessing it from the top-level namespace will also be removed in the next version
       PANDAS_TYPES = (pd.Series, pd.DataFrame, pd.Panel)
-    /home/corrie/.pyenv/versions/anaconda3-2019.03/lib/python3.7/site-packages/distributed/utils.py:134: RuntimeWarning: Couldn't detect a suitable IP address for reaching '8.8.8.8', defaulting to '127.0.0.1': [Errno 101] Network is unreachable
-      % (host, default, e), RuntimeWarning)
 
 
 
@@ -48,6 +47,7 @@ inf_data
     	> posterior_predictive
     	> prior
     	> observed_data
+    	> constant_data
 
 
 
