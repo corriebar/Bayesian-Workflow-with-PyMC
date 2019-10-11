@@ -207,6 +207,8 @@ def standardize(x, center=True):
     return (x - ctr) / np.std(x)
 
 
-process_europace_data()
+if __name__ == '__main__':
 
-process_immoscout_data()
+    process_europace_data()
+
+    process_immoscout_data()
