@@ -28,7 +28,10 @@ jupyter lab
 Then, inside jupyter, pick the according kernel for the notebooks.
 
 ## Preprocessing
-
+To download the shapefiles and preprocess the data, run
+```
+make data
+```
 
 ## Data
 The data used in the notebooks and for the talk is by [Europace AG](www.europace.de) and not in the Repository. I instead included a data set of rental offers that I scraped from Immoscout24. A more detailed description of how I scraped the data etc can be found [here](https://www.kaggle.com/corrieaar/apartment-rental-offers-in-germany).
