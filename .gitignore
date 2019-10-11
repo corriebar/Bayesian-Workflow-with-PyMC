@@ -3,6 +3,7 @@
 *.json
 *.npz
 *.nc
+*.pptx
 
 .idea/
 .ipynb_checkpoints/
