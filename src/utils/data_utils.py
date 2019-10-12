@@ -16,7 +16,7 @@ def load_data(kind="prices"):
     elif kind == "rents" and rent_data_exists:
         d = pd.read_csv(os.path.join(data_path, "rent.csv"), dtype={"zip": str}, index_col=0)
     else:
-        raise Exception("No data set found")
+        raise Exception("No processed data set found")
     d.zip = d.zip.map(str.strip)
     zip_codes = np.sort(d.zip.unique())
     num_zip_codes = len(zip_codes)

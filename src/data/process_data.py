@@ -1,11 +1,20 @@
+import os
+from pathlib import Path
+
 import pandas as pd
 import numpy as np
 
 # TODO make filepaths nicer
 
 def process_immoscout_data():
+    project_dir = Path(__file__).resolve().parents[2]
+    data_path = os.path.join(project_dir, "data", "raw_data", "immo_data.csv")
+    immo_data_exists = os.path.isfile(data_path)
 
-    d = pd.read_csv("../../data/raw_data/immo_data.csv", dtype= {"geo_plz": str, "scoutId": str})
+    if not immo_data_exists:
+        raise Exception("Immoscout csv-File not found, download if necessary https://www.kaggle.com/corrieaar/apartment-rental-offers-in-germany and unzip first")
+
+    d = pd.read_csv(data_path, dtype= {"geo_plz": str, "scoutId": str})
 
     d = make_immo_rents(d)
 
@@ -71,6 +80,13 @@ def select_rent_cols(d):
 
 
 def process_europace_data():
+
+    project_dir = Path(__file__).resolve().parents[2]
+    data_path = os.path.join(project_dir, "data", "raw_data", "houses.csv")
+    houses_data_exists = os.path.isfile(data_path)
+
+    if not houses_data_exists:
+        return print("Data not available, use Immoscout-Data instead")
 
     d = pd.read_csv("../../data/raw_data/houses.csv", dtype = {"ags": str, "plz": str}, index_col=0)
 
