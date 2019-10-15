@@ -1,6 +1,8 @@
 # Bayesian Workflow with PyMC and ArviZ
 
-Repository with code and notebook for my talk at PyConDE &amp; PyData Berlin 2019
+Repository with code and notebook for my talk at PyConDE &amp; PyData Berlin 2019.
+
+The slides for the talk can be found [here](https://www.slideshare.net/CorrieBartelheimer/bayesian-workflow-with-pymc3-and-arviz).
 
 
 
